@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
-import { data } from "react-router-dom";
+
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
-import { useEffect } from "react";
+
 // import { LogOut } from "lucide-react";
 
 
-const SOCKET_URL = "http://localhost:5001"; // Update with your server URL
+const SOCKET_URL=import.meta.env.MODE === "development"? "http://localhost:5001":"/" // Update with your server URL
 
 export const userAuthSore = create((set,get)=>({    
     authUser: null,
