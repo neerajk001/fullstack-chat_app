@@ -108,6 +108,7 @@ export const signin =async(req,res)=>{
 
     }catch(error){
         console.log("error in login",error)
+        return res.status(400).json({message:"Internal server error"})
     }
 }
 
@@ -116,7 +117,7 @@ export const logout =(req,res)=>{
         res.clearCookie("token");
     res.status(200).json({message:"loggedOut successfully"})
     }catch(error){
-        console.log("error in logout AbortController",error)
+        console.log("error in logout tController",error)
         res.status(500).json({
             message:"Interval server error "
         })
