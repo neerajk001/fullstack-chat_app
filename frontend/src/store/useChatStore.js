@@ -3,7 +3,10 @@ import toast from "react-hot-toast";
 import { axiosInstance } from "../lib/axios";
 import { userAuthSore } from "./userAuthStore";
 
-
+// Add this at the very top of the file
+const isValidUserId = (id) => {
+  return id && /^[0-9a-fA-F]{24}$/.test(id);
+};
 export const useChatStore=create((set ,get)=>({
     messages:[],
     users:[],
@@ -25,6 +28,10 @@ export const useChatStore=create((set ,get)=>({
     },
     sendMessage: async (messageData) => {
     const { selectedUser, messages } = get();
+     if (!selectedUser || !isValidUserId(selectedUser._id)) {
+    toast.error("Please select a valid user to send the message");
+    return;
+  }
     try {
       const res = await axiosInstance.post(`/message/send/${selectedUser._id}`, messageData);
       set({ messages: [...messages, res.data] });
@@ -64,6 +71,12 @@ export const useChatStore=create((set ,get)=>({
     },
     // optimise this later
 
-    setSelectedUser:async (selectedUser)=>set({selectedUser}),
-
+    setSelectedUser: (selectedUser) => {
+  // Add validation before setting
+  if (selectedUser && isValidUserId(selectedUser._id)) {
+    set({ selectedUser });
+  } else {
+    toast.error("Invalid user selected");
+  }
+},
 }))

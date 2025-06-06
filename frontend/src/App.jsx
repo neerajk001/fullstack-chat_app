@@ -28,7 +28,7 @@ function App() {
     <div >
   <Navbar />
   <Routes>
-    {/* <Route path="/landing" element={authUser ? <LandingPage/>} /> */}
+    
     <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
     <Route path='/signup' element={!authUser ? <SignUpPage/>:<Navigate to='/'/>} />
     <Route path='/login' element={!authUser ? <LoginPage/>: <Navigate to='/'/>} />

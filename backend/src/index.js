@@ -24,7 +24,20 @@ app.use(cors({
     methods:["GET","POST","PUT","DELETE"],
 }))
 
-
+// Add this before your routes
+app.use((req, res, next) => {
+  if (req.originalUrl.includes('https://') || req.originalUrl.includes('http://')) {
+    console.error('Invalid URL detected:', {
+      method: req.method,
+      url: req.originalUrl,
+      params: req.params,
+      query: req.query,
+      headers: req.headers
+    });
+    return res.status(400).json({ error: 'Invalid request URL' });
+  }
+  next();
+});
 
 app.use("/api/auth",authRoutes)
 app.use("/api/message",messageRoutes)
