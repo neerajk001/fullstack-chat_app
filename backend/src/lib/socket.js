@@ -3,9 +3,9 @@ import http from 'http';
 import express from 'express';
 
 const app = express();
-const server = http.createServer(app); // ✅ lowercase name
+const server = http.createServer(app); // 
 
-const io = new Server(server, { // ✅ now this is the socket.io Server class
+const io = new Server(server, { // 
   cors: {
     origin: ["http://localhost:5173"]
   }
