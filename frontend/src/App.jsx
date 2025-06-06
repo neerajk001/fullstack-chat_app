@@ -7,7 +7,7 @@ import cors from 'cors'
 import { Navigate } from 'react-router-dom'
 import  {Toaster} from 'react-hot-toast'
 import Navbar from './components/Navbar.jsx'
-import LoginPage from '../src/pages/LoginPage.jsx'
+
 import SignUpPage from '../src/pages/SignUpPage.jsx'
 import HomePage from '../src/pages/HomePage.jsx'
 import SettingPage from '../src/pages/SettingPage.jsx'
